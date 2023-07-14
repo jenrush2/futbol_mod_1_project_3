@@ -8,4 +8,8 @@ class Season
         @season_years = season_years
         @games = []
     end
+
+    def add_game(game_to_add)
+        @games << game_to_add
+    end
 end
