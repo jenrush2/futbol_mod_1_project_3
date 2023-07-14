@@ -1,6 +1,5 @@
 require './lib/team.rb'
 require 'rspec'
-#require './data/teams_test.csv'
 require 'CSV'
 
 RSpec.describe Team do
