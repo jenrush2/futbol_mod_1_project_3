@@ -47,4 +47,33 @@ RSpec.describe League do
         expect(mls_league.teams).to eq([atlanta_united, chicago_fire, fc_cincinnati, dc_united, fc_dallas])
     end
 
+    it 'can add seasons' do
+        mls_league = League.new("Major League Soccer")
+
+        season_2012_2013 = Season.new("20122013")
+        
+        array_of_games_hashes = []
+        CSV.foreach('./data/games_test.csv', :headers => true, :header_converters => :symbol) do |row|
+            array_of_games_hashes << Hash[row.headers.zip(row.fields)]
+            array_of_games_hashes
+        end
+
+        test_game_1 = Game.new(array_of_games_hashes[0])
+        test_game_2 = Game.new(array_of_games_hashes[1])
+        test_game_3 = Game.new(array_of_games_hashes[2])
+
+
+        season_2012_2013.add_game(test_game_1)
+        season_2012_2013.add_game(test_game_2)
+        season_2012_2013.add_game(test_game_3)
+
+        mls_league.add_season(season_2012_2013)
+
+        expect(mls_league.seasons).to be_an_instance_of Array 
+        expect(mls_league.seasons[0]).to be_an_instance_of Season 
+        expect(mls_league.seasons[0]).to eq(season_2012_2013)
+        expect(mls_league.seasons[0].games[0]).to eq(test_game_1)
+        
+    end
+
 end

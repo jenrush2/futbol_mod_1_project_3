@@ -16,4 +16,8 @@ class League
     def add_team(team_to_add)
         @teams << team_to_add
     end
+
+    def add_season(season_to_add)
+        @seasons << season_to_add
+    end
 end

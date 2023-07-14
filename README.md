@@ -24,7 +24,8 @@ The instructions say that: Each of the methods described below (on instructions 
 
     League class:
         attributes: name (Major League Soccer), teams (array of Team classes?), seasons (an array of Season classes and those contain the games)
-        methods: (These are all "across all seasons") count_of_teams, best_offense, worst_offense, highest_scoring_visitor, highest_scoring_home_team, lowest_scoring_visitor, lowest_scoring_home_team
+        methods: add_team, add_season
+        (below methods are all "across all seasons") count_of_teams, best_offense, worst_offense, highest_scoring_visitor, highest_scoring_home_team, lowest_scoring_visitor, lowest_scoring_home_team
     
     
     Season class:
