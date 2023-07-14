@@ -23,13 +23,13 @@ The instructions say that: Each of the methods described below (on instructions 
                 game_id,team_id,HoA,result,settled_in,head_coach,goals,shots,tackles,pim,powerPlayOpportunities,powerPlayGoals,faceOffWinPercentage,giveaways,takeaways
 
     League class:
-        attributes: name, teams (array of Team classes?)
+        attributes: name (Major League Soccer), teams (array of Team classes?), seasons (an array of Season classes and those contain the games)
         methods: (These are all "across all seasons") count_of_teams, best_offense, worst_offense, highest_scoring_visitor, highest_scoring_home_team, lowest_scoring_visitor, lowest_scoring_home_team
     
     
     Season class:
-        attributes: season_name (two year split in header), games (array of Game classes)
-        methods: winningest_coach, worst_coach, most_accurate_team, least_accurate_team, most_tackles, fewest_tackles
+        attributes: season_years (two year split in header), games (array of Game classes)
+        methods: add_game, winningest_coach, worst_coach, most_accurate_team, least_accurate_team, most_tackles, fewest_tackles
     
 
     Methods I'm iffy about placement because they are all under "Game Statistics" in the instructions:
