@@ -10,4 +10,12 @@ RSpec.describe Season do
 
         expect(season_2012_2013).to be_an_instance_of Season
     end
+
+    it 'has attributes' do 
+        season_2012_2013 = Season.new("20122013")
+
+        expect(season_2012_2013.season_years).to eq "20122013"
+        expect(season_2012_2013.games).to eq([])
+    end
+
 end
