@@ -1,4 +1,5 @@
 require 'CSV'
+require 'pry'
 require_relative './team.rb'
 require_relative './game.rb'
 require_relative './game_team.rb'
@@ -44,6 +45,12 @@ class StatTracker
         end
         all_total_scores.min
     end
-        
+   
+    def percentage_home_wins
+        home_wins = @game_teams.count do |game_team_object|
+                    (game_team_object.hoa == "home") and (game_team_object.result == "WIN")
+                    end
+        (home_wins/@games.count.to_f).round(2)
+    end
 
 end
