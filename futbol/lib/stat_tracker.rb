@@ -126,5 +126,131 @@ class StatTracker
 
     end
 
+    def worst_offense
+        teams_and_goals_hash = @game_teams.reduce({}) do |new_hash, game_team_object|
+            new_hash[game_team_object.team_id] = @game_teams.reduce(0) do |sum, object| 
+                        if object.team_id == game_team_object.team_id 
+                            sum + object.goals.to_i
+                        else
+                            sum
+                        end
+                    end
+            new_hash
+        end
+
+        teams_and_goal_avg_hash = teams_and_goals_hash.reduce({}) do |new_hash, team_goal_pair|
+            new_hash[team_goal_pair[0]] = (team_goal_pair[1].to_f/(@game_teams.count{|game| game.team_id == team_goal_pair[0]})).round(2)
+            new_hash
+        end
+
+        terrible_team_id = teams_and_goal_avg_hash.key(teams_and_goal_avg_hash.values.min)
+        
+        @teams.find{|team_object| team_object.team_id == terrible_team_id}.teamname
+    end
+
+    def highest_scoring_visitor
+        teams_and_goals_hash_away_only = @game_teams.reduce({}) do |new_hash, game_team_object|
+            new_hash[game_team_object.team_id] = @game_teams.reduce(0) do |sum, object| 
+                        if (object.team_id == game_team_object.team_id) and (object.hoa == "away") 
+                            sum + object.goals.to_i
+                        else
+                            sum
+                        end
+                    end
+            new_hash
+        end
+
+        teams_and_goal_avg_hash = teams_and_goals_hash_away_only.reduce({}) do |new_hash, team_goal_pair|
+            new_hash[team_goal_pair[0]] = (team_goal_pair[1].to_f/(@game_teams.count{|game| game.team_id == team_goal_pair[0]})).round(2)
+            new_hash
+        end
+
+        awesome_team_id = teams_and_goal_avg_hash.key(teams_and_goal_avg_hash.values.max)
+        
+        @teams.find{|team_object| team_object.team_id == awesome_team_id}.teamname
+    end
+
+    def highest_scoring_home_team
+        teams_and_goals_hash_home_only = @game_teams.reduce({}) do |new_hash, game_team_object|
+            new_hash[game_team_object.team_id] = @game_teams.reduce(0) do |sum, object| 
+                        if (object.team_id == game_team_object.team_id) and (object.hoa == "home") 
+                            sum + object.goals.to_i
+                        else
+                            sum
+                        end
+                    end
+            new_hash
+        end
+
+        teams_and_goal_avg_hash = teams_and_goals_hash_home_only.reduce({}) do |new_hash, team_goal_pair|
+            new_hash[team_goal_pair[0]] = (team_goal_pair[1].to_f/(@game_teams.count{|game| game.team_id == team_goal_pair[0]})).round(2)
+            new_hash
+        end
+
+        awesome_team_id = teams_and_goal_avg_hash.key(teams_and_goal_avg_hash.values.max)
+        
+        @teams.find{|team_object| team_object.team_id == awesome_team_id}.teamname
+    end
+
+    def lowest_scoring_visitor
+        teams_and_goals_hash_away_only = @game_teams.reduce({}) do |new_hash, game_team_object|
+            new_hash[game_team_object.team_id] = @game_teams.reduce(0) do |sum, object| 
+                        if (object.team_id == game_team_object.team_id) and (object.hoa == "away") 
+                            sum + object.goals.to_i
+                        else
+                            sum
+                        end
+                    end
+            new_hash
+        end
+
+        teams_and_goal_avg_hash = teams_and_goals_hash_away_only.reduce({}) do |new_hash, team_goal_pair|
+            new_hash[team_goal_pair[0]] = (team_goal_pair[1].to_f/(@game_teams.count{|game| game.team_id == team_goal_pair[0]})).round(2)
+            new_hash
+        end
+
+        terrible_team_id = teams_and_goal_avg_hash.key(teams_and_goal_avg_hash.values.min)
+        
+        @teams.find{|team_object| team_object.team_id == terrible_team_id}.teamname
+    end
+
+    def lowest_scoring_home_team
+        teams_and_goals_hash_home_only = @game_teams.reduce({}) do |new_hash, game_team_object|
+            new_hash[game_team_object.team_id] = @game_teams.reduce(0) do |sum, object| 
+                        if (object.team_id == game_team_object.team_id) and (object.hoa == "home") 
+                            sum + object.goals.to_i
+                        else
+                            sum
+                        end
+                    end
+            new_hash
+        end
+
+        teams_and_goal_avg_hash = teams_and_goals_hash_home_only.reduce({}) do |new_hash, team_goal_pair|
+            new_hash[team_goal_pair[0]] = (team_goal_pair[1].to_f/(@game_teams.count{|game| game.team_id == team_goal_pair[0]})).round(2)
+            new_hash
+        end
+
+        terrible_team_id = teams_and_goal_avg_hash.key(teams_and_goal_avg_hash.values.min)
+        
+        @teams.find{|team_object| team_object.team_id == terrible_team_id}.teamname
+    end
+
+    def team_info(id_of_team)
+        @teams.reduce({}) do |hash_of_team_info, team_object|
+            if team_object.team_id == id_of_team
+                hash_of_team_info["team_id"] = team_object.team_id
+                hash_of_team_info["franchise_id"] = team_object.franchiseid
+                hash_of_team_info["team_name"] = team_object.teamname
+                hash_of_team_info["abbreviation"] = team_object.abbreviation
+                hash_of_team_info["link"] = team_object.link
+                hash_of_team_info
+            else
+                hash_of_team_info
+            end
+        end
+    end
+
+
 
 end
