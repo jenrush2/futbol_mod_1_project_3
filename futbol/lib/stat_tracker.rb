@@ -67,4 +67,12 @@ class StatTracker
         ((ties/2)/@games.count.to_f).round(2)
     end
 
+    def count_of_games_by_season
+        @games.reduce({}) do |games_by_season_hash, game_object|
+            total_games_in_a_season = @games.count{|game| game.season == game_object.season}
+            games_by_season_hash[game_object.season] = total_games_in_a_season
+            games_by_season_hash
+        end
+    end
+
 end
