@@ -83,5 +83,48 @@ class StatTracker
         (goals_per_game.sum.to_f/@games.count).round(2)
     end
 
+    def average_goals_by_season
+
+        @games.reduce({}) do |goals_by_season_hash, game_object|
+            
+            goals_in_a_season =  
+                (@games.reduce(0) do |sum, game|
+                    if game.season == game_object.season
+                        sum + (game.home_goals.to_i + game.away_goals.to_i)
+                    else
+                        sum
+                    end
+                end)
+                
+            average_goals_in_a_season = (goals_in_a_season.to_f/self.count_of_games_by_season[game_object.season]).round(2)
+            goals_by_season_hash[game_object.season] = average_goals_in_a_season
+            goals_by_season_hash
+
+        end
+    end
+
+    def best_offense
+        teams_and_goals_hash = @game_teams.reduce({}) do |new_hash, game_team_object|
+            new_hash[game_team_object.team_id] = @game_teams.reduce(0) do |sum, object| 
+                        if object.team_id == game_team_object.team_id 
+                            sum + object.goals.to_i
+                        else
+                            sum
+                        end
+                    end
+            new_hash
+        end
+
+        teams_and_goal_avg_hash = teams_and_goals_hash.reduce({}) do |new_hash, team_goal_pair|
+            new_hash[team_goal_pair[0]] = (team_goal_pair[1].to_f/(@game_teams.count{|game| game.team_id == team_goal_pair[0]})).round(2)
+            new_hash
+        end
+
+        awesome_team_id = teams_and_goal_avg_hash.key(teams_and_goal_avg_hash.values.max)
+        
+        @teams.find{|team_object| team_object.team_id == awesome_team_id}.teamname
+
+    end
+
 
 end
