@@ -60,4 +60,11 @@ class StatTracker
         (visitor_wins/@games.count.to_f).round(2)
     end
 
+    def percentage_ties
+        ties = @game_teams.count do |game_team_object|
+            game_team_object.result == "TIE"
+            end
+        ((ties/2)/@games.count.to_f).round(2)
+    end
+
 end
