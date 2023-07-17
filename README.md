@@ -7,38 +7,4 @@ The instructions say that: Each of the methods described below (on instructions 
 
 
 
-    Team class:
-        attributes: everything in the headers for teams csv file?
-            team_id,franchiseId,teamName,abbreviation,Stadium,link
-
-        methods: list home wins in a season, list home losses in a season, list away wins in a season, list away losses in a season, season shots, season goals, season tackles, average goals per game in a season
-    
-    Game class:
-        attributes: everything in the headers for games csv? 
-            game:
-                game_id,season,type,date_time,away_team_id,home_team_id,away_goals,home_goals,venue,venue_link
-
-        methods: split up all "game by team" stats into home and visitor stats?
-            game by team:
-                game_id,team_id,HoA,result,settled_in,head_coach,goals,shots,tackles,pim,powerPlayOpportunities,powerPlayGoals,faceOffWinPercentage,giveaways,takeaways
-
-    League class:
-        attributes: name (Major League Soccer), teams (array of Team classes?), seasons (an array of Season classes and those contain the games)
-        methods: add_team, add_season
-        (below methods are all "across all seasons") count_of_teams, best_offense, worst_offense, highest_scoring_visitor, highest_scoring_home_team, lowest_scoring_visitor, lowest_scoring_home_team
-    
-    
-    Season class:
-        attributes: season_years (two year split in header), games (array of Game classes)
-        methods: add_game, winningest_coach, worst_coach, most_accurate_team, least_accurate_team, most_tackles, fewest_tackles
-    
-
-    Methods I'm iffy about placement because they are all under "Game Statistics" in the instructions:
-        average_goals_per_game (across all seasons) --> League or only contained in StatTracker?
-        average_goals_by_season (avg per game for each season) --> League or only contained in StatTracker?
-        count_of_games_by_season (seasons to counts of games) --> League or only contained in StatTracker?
-        percentage_ties (assumed to be across all seasons) --> League or only contained in StatTracker?
-        percentage_visitor_wins (assumed to be across all seasons) --> League or only contained in StatTracker?
-        percentage_home_wins (assumed to be across all seasons) --> League or only contained in StatTracker?
-        lowest_total_score (assumed to be across all seasons) --> League or only contained in StatTracker?
-        highest_total_score (assumed to be across all seasons) --> League or only contained in StatTracker?
+All data tests in stat_tracker per the instructions. Classes that match the csv files: Game, Team, and Game_Team. Attributes will match column headers for each CSV file. Use spec harness to run tests on stat_tracker and my own tests for each class created. 

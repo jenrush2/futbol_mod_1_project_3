@@ -1,4 +1,3 @@
-require './lib/team.rb'
 require './lib/game.rb'
 require 'rspec'
 require 'CSV'
