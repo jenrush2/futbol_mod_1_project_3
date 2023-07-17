@@ -53,4 +53,11 @@ class StatTracker
         (home_wins/@games.count.to_f).round(2)
     end
 
+    def percentage_visitor_wins
+        visitor_wins = @game_teams.count do |game_team_object|
+            (game_team_object.hoa == "away") and (game_team_object.result == "WIN")
+            end
+        (visitor_wins/@games.count.to_f).round(2)
+    end
+
 end
