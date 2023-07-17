@@ -75,4 +75,13 @@ class StatTracker
         end
     end
 
+    def average_goals_per_game
+        goals_per_game = @games.reduce([]) do |goals, game_object|
+            goals << game_object.home_goals.to_i + game_object.away_goals.to_i 
+        end
+
+        (goals_per_game.sum.to_f/@games.count).round(2)
+    end
+
+
 end
