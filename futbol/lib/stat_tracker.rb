@@ -37,6 +37,13 @@ class StatTracker
         end
         all_total_scores.max
     end
+
+    def lowest_total_score
+        all_total_scores = @games.reduce([]) do |new_array, game_object|
+            new_array << game_object.home_goals.to_i + game_object.away_goals.to_i 
+        end
+        all_total_scores.min
+    end
         
 
 end
