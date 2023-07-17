@@ -1,7 +1,7 @@
 require 'CSV'
-require './lib/team.rb'
-require './lib/game.rb'
-require './lib/game_team.rb'
+require_relative './team.rb'
+require_relative './game.rb'
+require_relative './game_team.rb'
 
 class StatTracker 
     attr_reader :games, :teams, :game_teams
@@ -31,7 +31,12 @@ class StatTracker
         @teams.count 
     end
 
-
+    def highest_total_score
+        all_total_scores = @games.reduce([]) do |new_array, game_object|
+            new_array << game_object.home_goals.to_i + game_object.away_goals.to_i 
+        end
+        all_total_scores.max
+    end
         
 
 end
