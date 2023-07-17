@@ -26,7 +26,10 @@ class StatTracker
     def self.from_csv(locations)
         StatTracker.new(locations)
     end
-
+    
+    def count_of_teams
+        @teams.count 
+    end
 
 
         
