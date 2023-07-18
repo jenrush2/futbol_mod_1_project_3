@@ -277,7 +277,30 @@ class StatTracker
 
     end
 
+    def worst_coach(season)
+        games_that_match_season = @games.find_all{|game| game.season == season}
+        id_of_games_that_match_season = games_that_match_season.reduce([]) do |id_list, game|
+            id_list << game.game_id
+            id_list = id_list.uniq
+        end
 
+        game_teams_that_match_season = @game_teams.find_all{|game_team| id_of_games_that_match_season.include?(game_team.game_id)}
+
+        coaches_to_season_wins = game_teams_that_match_season.reduce({}) do |coaches_to_wins_hash, game_team_object|
+            
+            if coaches_to_wins_hash[game_team_object.head_coach] == nil
+                number_of_games_from_that_coach = game_teams_that_match_season.count{|game| game.head_coach == game_team_object.head_coach} 
+                number_of_wins_from_that_coach = game_teams_that_match_season.count{|game| (game.head_coach == game_team_object.head_coach) and game.result == "WIN"} 
+                coaches_to_wins_hash[game_team_object.head_coach] = (number_of_wins_from_that_coach/number_of_games_from_that_coach.to_f).round(2)
+                coaches_to_wins_hash
+            else
+                coaches_to_wins_hash
+            end
+            
+        end
+        coaches_to_season_wins.key(coaches_to_season_wins.values.min)
+
+    end
 
 
 end
