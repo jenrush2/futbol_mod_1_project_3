@@ -32,4 +32,5 @@ class Game_Team
         @giveaways = args[:giveaways]
         @takeaways = args[:takeaways]
     end
+
 end
